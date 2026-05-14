@@ -11,6 +11,7 @@ export const defaultProducts: ProductRow[] = [
     price_starting_from: 15000,
     main_image_url:
       "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&q=80",
+    main_image_sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw",
     image_gallery_urls: [
       "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&q=80",
       "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&q=80",
@@ -31,6 +32,7 @@ export const defaultProducts: ProductRow[] = [
     description: "Tampah anyaman compact untuk sajian snack dan display meja.",
     price_starting_from: 12000,
     main_image_url: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&q=80",
+    main_image_sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw",
     image_gallery_urls: [
       "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&q=80",
     ],
@@ -48,6 +50,7 @@ export const defaultProducts: ProductRow[] = [
     description: "Wadah silinder dengan tutup rapat untuk oleh-oleh kering.",
     price_starting_from: 22000,
     main_image_url: "https://images.unsplash.com/photo-1610557892470-55d9e80c0ce1?w=800&q=80",
+    main_image_sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw",
     image_gallery_urls: [],
     is_signature: true,
     labels: ["Handmade"],
@@ -63,6 +66,7 @@ export const defaultProducts: ProductRow[] = [
     description: "Tas anyaman dengan gagang bambu untuk hantaran istimewa.",
     price_starting_from: 35000,
     main_image_url: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=800&q=80",
+    main_image_sizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw",
     image_gallery_urls: [],
     is_signature: true,
     labels: ["Sustainable"],
@@ -83,6 +87,9 @@ export const defaultSiteContent: SiteContentRow[] = [
       "Solusi kemasan ramah lingkungan, estetik, dan berkelanjutan untuk katering dan hampers premium.",
     image_url:
       "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1600&q=80",
+    image_fit: "cover",
+    image_position: "center center",
+    image_sizes: "100vw",
   },
   {
     id: "d-home-why1",
@@ -127,6 +134,9 @@ export const defaultSiteContent: SiteContentRow[] = [
     description_text:
       "Kami memilih kearifan tradisional daripada plastik sekali pakai. Misi kami adalah menggantikan material sintetis dengan kemasan yang lahir dari bumi—bambu yang ditanam, dipanen, dan dianyam dengan penuh hormat terhadap alam dan pengrajin.\n\nDengan setiap anyaman, kami mendekatkan dunia modern pada cara hidup yang lebih selaras dengan ekosistem.",
     image_url: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=900&q=80",
+    image_fit: "cover",
+    image_position: "center center",
+    image_sizes: "(max-width: 768px) 100vw, 45vw",
   },
   {
     id: "d-about-story",
@@ -168,17 +178,20 @@ export const defaultGallery: GalleryRow[] = [
     image_url: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=900&q=80",
     alt_text: "Tangan pengrajin menganyam strip bambu tipis dengan teliti.",
     section_name: "AboutMosaic_Left",
+    image_sizes: "(max-width: 768px) 100vw, 50vw",
   },
   {
     id: "g2",
     image_url: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=700&q=80",
     alt_text: "Tiga besek bundar anyaman bambu ditumpuk rapi di alas putih.",
     section_name: "AboutMosaic_RightTop",
+    image_sizes: "(max-width: 768px) 100vw, 50vw",
   },
   {
     id: "g3",
     image_url: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=700&q=80",
     alt_text: "Batang bambu mentah sedang diproses di meja kerja bengkel.",
     section_name: "AboutMosaic_RightBottom",
+    image_sizes: "(max-width: 768px) 100vw, 50vw",
   },
 ];

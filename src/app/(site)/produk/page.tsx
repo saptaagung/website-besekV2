@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { CmsImage } from "@/components/cms/CmsImage";
 import { getContactInfo, getProducts } from "@/lib/data/queries";
 import { waLink } from "@/lib/whatsapp";
 
@@ -38,12 +38,13 @@ export default async function ProductsPage() {
             >
               <Link href={`/produk/${p.id}`} className="relative aspect-square bg-neutral-100">
                 {p.main_image_url ? (
-                  <Image
+                  <CmsImage
                     src={p.main_image_url}
                     alt={p.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    fit={p.main_image_fit}
+                    position={p.main_image_position}
+                    sizes={p.main_image_sizes}
+                    sizesFallback="(max-width: 768px) 100vw, 50vw"
                   />
                 ) : null}
                 {p.collection_name ? (

@@ -36,7 +36,14 @@ export default async function ProductDetailPage({
   return (
     <div className="bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-12 md:grid-cols-2 md:gap-16 md:px-6 md:py-16">
-        <ProductMedia images={thumbs} productName={product.name} />
+        <ProductMedia
+          images={thumbs}
+          productName={product.name}
+          mainImageUrl={product.main_image_url}
+          mainImageFit={product.main_image_fit}
+          mainImagePosition={product.main_image_position}
+          mainImageSizes={product.main_image_sizes}
+        />
 
         <div className="flex flex-col gap-6">
           <div className="flex flex-wrap gap-2">

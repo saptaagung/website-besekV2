@@ -10,6 +10,9 @@ create table if not exists public.products (
   description text,
   price_starting_from numeric,
   main_image_url text,
+  main_image_fit text default 'cover',
+  main_image_position text default 'center center',
+  main_image_sizes text,
   image_gallery_urls text[] default '{}',
   is_signature boolean default false,
   labels text[] default '{}',
@@ -28,6 +31,9 @@ create table if not exists public.site_content (
   headline_text text,
   description_text text,
   image_url text,
+  image_fit text default 'cover',
+  image_position text default 'center center',
+  image_sizes text default '100vw',
   created_at timestamptz not null default now(),
   unique (page_name, section_name)
 );
@@ -47,6 +53,9 @@ create table if not exists public.gallery (
   image_url text not null,
   alt_text text,
   section_name text not null,
+  image_fit text default 'cover',
+  image_position text default 'center center',
+  image_sizes text,
   created_at timestamptz not null default now()
 );
 

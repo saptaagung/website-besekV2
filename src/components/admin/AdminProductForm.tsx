@@ -27,6 +27,9 @@ export function AdminProductForm({ product }: Props) {
     dimensions: product?.dimensions ?? "",
     technique: product?.technique ?? "",
     color: product?.color ?? "",
+    main_image_fit: product?.main_image_fit === "contain" ? "contain" : "cover",
+    main_image_position: product?.main_image_position ?? "",
+    main_image_sizes: product?.main_image_sizes ?? "",
   });
 
   async function save() {
@@ -42,6 +45,9 @@ export function AdminProductForm({ product }: Props) {
       description: form.description || null,
       price_starting_from: form.price_starting_from ? Number(form.price_starting_from) : null,
       main_image_url: form.main_image_url || null,
+      main_image_fit: form.main_image_fit === "contain" ? "contain" : "cover",
+      main_image_position: form.main_image_position.trim() || null,
+      main_image_sizes: form.main_image_sizes.trim() || null,
       image_gallery_urls: form.image_gallery_urls
         .split("\n")
         .map((s) => s.trim())
@@ -152,6 +158,37 @@ export function AdminProductForm({ product }: Props) {
           onChange={(e) => setForm({ ...form, main_image_url: e.target.value })}
         />
       </Field>
+      <div className="grid gap-3 md:grid-cols-3">
+        <Field label="Gambar utama: isi frame">
+          <select
+            className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            value={form.main_image_fit}
+            onChange={(e) => setForm({ ...form, main_image_fit: e.target.value })}
+          >
+            <option value="cover">Cover</option>
+            <option value="contain">Contain</option>
+          </select>
+        </Field>
+        <Field label="Posisi crop (CSS)">
+          <input
+            className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            value={form.main_image_position}
+            onChange={(e) => setForm({ ...form, main_image_position: e.target.value })}
+            placeholder="center center"
+          />
+        </Field>
+        <Field label="Sizes (Next.js)">
+          <input
+            className="w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            value={form.main_image_sizes}
+            onChange={(e) => setForm({ ...form, main_image_sizes: e.target.value })}
+            placeholder="(max-width:768px) 100vw, 50vw"
+          />
+        </Field>
+      </div>
+      <p className="text-xs text-neutral-500">
+        <strong>Sizes</strong> mengatur resolusi yang dimuat di grid dan halaman produk. Kosongkan untuk pakai default situs.
+      </p>
       <Field label="Galeri (satu URL per baris)">
         <textarea
           className="min-h-[100px] w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"

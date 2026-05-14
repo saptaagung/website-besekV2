@@ -2,14 +2,15 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { ADMIN_DEFAULT_EMAIL, ADMIN_DEFAULT_PASSWORD } from "@/lib/admin-login-defaults";
 import { createClient } from "@/lib/supabase/client";
 
 export function AdminLoginForm() {
   const router = useRouter();
   const params = useSearchParams();
   const supabase = createClient();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(ADMIN_DEFAULT_EMAIL);
+  const [password, setPassword] = useState(ADMIN_DEFAULT_PASSWORD);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 

@@ -21,7 +21,7 @@ No secrets should be committed. For production on Vercel, add the same variables
 
 1. In the Supabase SQL editor, run `supabase/schema.sql` once to create tables, triggers, and RLS policies.
 2. Optionally run `supabase/seed.sql` for starter `site_content` rows (and example gallery URLs).
-3. In **Authentication → Providers**, enable **Email**. Create an admin user (sign up once, or invite via dashboard). Use that email and password at `/admin/login`.
+3. In **Authentication → Providers**, enable **Email**. Add one user with the **same email and password** as in `src/lib/admin-login-defaults.ts` (pre-filled on `/admin/login`). Change those constants (and the Supabase user) before sharing the repo publicly.
 
 Row-level security:
 
