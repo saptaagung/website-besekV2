@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-olive: #3d4f2f;
+  --color-olive-dark: #2d3a24;
+  --color-cream: #faf8f5;
+  --color-peach: #f5e6dc;
+  --color-muted: #5c5c5c;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-neutral-900 antialiased font-sans;
+  }
+}
