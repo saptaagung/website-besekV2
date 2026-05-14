@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/cms/CmsImage";
 import { getGalleryBySections, getSiteSections } from "@/lib/data/queries";
 
 const mosaicSections = [
@@ -19,6 +19,10 @@ export default async function AboutPage() {
   const rb = pick("AboutMosaic_RightBottom");
 
   const missionImage = mission?.image_url ?? left?.image_url;
+  const missionUsesSiteContent = Boolean(mission?.image_url);
+  const missionFit = missionUsesSiteContent ? mission?.image_fit : left?.image_fit;
+  const missionPosition = missionUsesSiteContent ? mission?.image_position : left?.image_position;
+  const missionSizes = missionUsesSiteContent ? mission?.image_sizes : left?.image_sizes;
 
   return (
     <div className="bg-white">
@@ -43,13 +47,14 @@ export default async function AboutPage() {
         <div className="order-1 md:order-2">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-neutral-100 md:aspect-[4/5]">
             {missionImage ? (
-              <Image
+              <CmsImage
                 src={missionImage}
                 alt="Ilustrasi bambu dan alam"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 45vw"
                 priority
+                fit={missionFit}
+                position={missionPosition}
+                sizes={missionSizes}
+                sizesFallback="(max-width: 768px) 100vw, 45vw"
               />
             ) : null}
           </div>
@@ -69,34 +74,37 @@ export default async function AboutPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:grid-rows-2">
           <div className="relative min-h-[420px] overflow-hidden rounded-lg bg-neutral-100 md:row-span-2 md:min-h-[640px]">
             {left?.image_url ? (
-              <Image
+              <CmsImage
                 src={left.image_url}
                 alt={left.alt_text ?? "Proses anyaman tangan"}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                fit={left.image_fit}
+                position={left.image_position}
+                sizes={left.image_sizes}
+                sizesFallback="(max-width: 768px) 100vw, 50vw"
               />
             ) : null}
           </div>
           <div className="relative min-h-[300px] overflow-hidden rounded-lg bg-neutral-100">
             {rt?.image_url ? (
-              <Image
+              <CmsImage
                 src={rt.image_url}
                 alt={rt.alt_text ?? "Produk besek jadi"}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                fit={rt.image_fit}
+                position={rt.image_position}
+                sizes={rt.image_sizes}
+                sizesFallback="(max-width: 768px) 100vw, 50vw"
               />
             ) : null}
           </div>
           <div className="relative min-h-[300px] overflow-hidden rounded-lg bg-neutral-100">
             {rb?.image_url ? (
-              <Image
+              <CmsImage
                 src={rb.image_url}
                 alt={rb.alt_text ?? "Bengkel pengrajin bambu"}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                fit={rb.image_fit}
+                position={rb.image_position}
+                sizes={rb.image_sizes}
+                sizesFallback="(max-width: 768px) 100vw, 50vw"
               />
             ) : null}
           </div>

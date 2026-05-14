@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { CmsImage } from "@/components/cms/CmsImage";
 import {
   formatIdr,
   getSignatureProducts,
@@ -46,19 +46,17 @@ export default async function HomePage() {
   return (
     <>
       <section className="relative -mt-24 overflow-hidden bg-neutral-900 pt-24 md:-mt-[5.75rem] md:pt-[5.75rem]">
-        {/*
-          Portrait hero photos + object-cover scale up with viewport width (subject looks "huge").
-          Constrain both max width and max height so the crop stays reasonable on large monitors.
-        */}
-        <div className="relative mx-auto h-[clamp(22rem,85dvh,56rem)] w-full max-w-[90rem]">
+        <div className="relative mx-auto h-[clamp(22rem,85dvh,56rem)] w-full">
           {hero?.image_url ? (
-            <Image
+            <CmsImage
               src={hero.image_url}
               alt=""
-              fill
               priority
-              className="object-cover object-center brightness-[0.85]"
-              sizes="(max-width: 1440px) 100vw, 1440px"
+              fit={hero.image_fit}
+              position={hero.image_position}
+              sizes={hero.image_sizes}
+              sizesFallback="100vw"
+              className="brightness-[0.85]"
             />
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 to-neutral-900" />
@@ -130,12 +128,13 @@ export default async function HomePage() {
               >
                 <Link href={`/produk/${p.id}`} className="relative aspect-square bg-neutral-100">
                   {p.main_image_url ? (
-                    <Image
+                    <CmsImage
                       src={p.main_image_url}
                       alt={p.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
+                      fit={p.main_image_fit}
+                      position={p.main_image_position}
+                      sizes={p.main_image_sizes}
+                      sizesFallback="(max-width: 1024px) 50vw, 25vw"
                     />
                   ) : null}
                   {p.collection_name ? (

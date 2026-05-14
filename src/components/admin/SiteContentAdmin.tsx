@@ -21,6 +21,9 @@ export function SiteContentAdmin({ initialRows }: { initialRows: SiteContentRow[
         headline_text: row.headline_text,
         description_text: row.description_text,
         image_url: row.image_url,
+        image_fit: row.image_fit ?? "cover",
+        image_position: row.image_position?.trim() || null,
+        image_sizes: row.image_sizes?.trim() || null,
       })
       .eq("id", row.id);
     if (upErr) {
@@ -97,6 +100,38 @@ function SiteContentRowEditor({
             value={draft.image_url ?? ""}
             onChange={(e) => setDraft({ ...draft, image_url: e.target.value || null })}
           />
+        </label>
+        <label className="text-sm">
+          <span className="font-medium">Gambar: isi frame</span>
+          <select
+            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            value={draft.image_fit === "contain" ? "contain" : "cover"}
+            onChange={(e) => setDraft({ ...draft, image_fit: e.target.value })}
+          >
+            <option value="cover">Cover (penuh, bisa terpotong)</option>
+            <option value="contain">Contain (utuh, bisa ada ruang)</option>
+          </select>
+        </label>
+        <label className="text-sm">
+          <span className="font-medium">Posisi crop (CSS)</span>
+          <input
+            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            value={draft.image_position ?? ""}
+            onChange={(e) => setDraft({ ...draft, image_position: e.target.value || null })}
+            placeholder="center center"
+          />
+        </label>
+        <label className="text-sm md:col-span-2">
+          <span className="font-medium">Ukuran responsif (sizes, Next.js)</span>
+          <input
+            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            value={draft.image_sizes ?? ""}
+            onChange={(e) => setDraft({ ...draft, image_sizes: e.target.value || null })}
+            placeholder="100vw atau (max-width:768px) 100vw, 50vw"
+          />
+          <span className="mt-1 block text-xs text-neutral-500">
+            Mengatur resolusi gambar yang dimuat; kosongkan untuk pakai default halaman.
+          </span>
         </label>
         <label className="text-sm md:col-span-2">
           <span className="font-medium">Deskripsi / isi</span>
