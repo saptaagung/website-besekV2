@@ -14,25 +14,29 @@ values
     'Home',
     'WhyUs_1',
     '100% Organik',
-    'Bahan bambu terpilih tanpa pewarna kimia berbahaya, aman untuk kontak makanan.'
+    'Bahan bambu terpilih tanpa pewarna kimia berbahaya, aman untuk kontak makanan.',
+    NULL
   ),
   (
     'Home',
     'WhyUs_2',
     'Anyaman Kokoh',
-    'Teknik anyaman ganda memberi kekuatan struktural untuk beban catering harian.'
+    'Teknik anyaman ganda memberi kekuatan struktural untuk beban catering harian.',
+    NULL
   ),
   (
     'Home',
     'WhyUs_3',
     'Pemberdayaan Perajin Lokal',
-    'Setiap produk mendukung pengrajin di sentra kerajinan Yogyakarta dan sekitarnya.'
+    'Setiap produk mendukung pengrajin di sentra kerajinan Yogyakarta dan sekitarnya.',
+    NULL
   ),
   (
     'Home',
     'SignatureIntro',
     'Koleksi Signature',
-    'Estetika natural untuk setiap kebutuhan presentasi Anda.'
+    'Estetika natural untuk setiap kebutuhan presentasi Anda.',
+    NULL
   ),
   (
     'About',
@@ -45,13 +49,15 @@ values
     'About',
     'CreationStory',
     'Dibuat dengan Hati',
-    'Proses yang sabar: pengrajin lokal mengubah bambu menjadi karya yang fungsional sekaligus indah—setiap lembar direkatkan dengan ketelitian dan kebanggaan akan warisan.'
+    'Proses yang sabar: pengrajin lokal mengubah bambu menjadi karya yang fungsional sekaligus indah—setiap lembar direkatkan dengan ketelitian dan kebanggaan akan warisan.',
+    NULL
   ),
   (
     'Contact',
     'Intro',
     'Hubungi Kami',
-    'Kami selalu senang mendengar dari Anda. Apakah Anda memiliki pertanyaan tentang koleksi kami, pesanan khusus, atau ingin mengunjungi workshop kami.'
+    'Kami selalu senang mendengar dari Anda. Apakah Anda memiliki pertanyaan tentang koleksi kami, pesanan khusus, atau ingin mengunjungi workshop kami.',
+    NULL
   )
 on conflict (page_name, section_name) do update set
   headline_text = excluded.headline_text,

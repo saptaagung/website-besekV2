@@ -13,7 +13,7 @@ Premium, deployable marketing site and Supabase-backed admin for **Besek Artisan
 Copy `.env.example` to `.env.local` and fill in values from the Supabase project settings (**Project URL** and **anon public** key):
 
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (recommended in newer Supabase projects) **or** `NEXT_PUBLIC_SUPABASE_ANON_KEY` (legacy anon JWT — either works; the app prefers publishable when set)
 
 No secrets should be committed. For production on Vercel, add the same variables in the project dashboard.
 
@@ -59,7 +59,7 @@ Open [http://localhost:3000](http://localhost:3000). Without Supabase env vars, 
 
 1. Push the repository to GitHub/GitLab/Bitbucket.
 2. Import the repo in Vercel; framework preset **Next.js**.
-3. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel **Environment Variables** (Production + Preview as needed).
+3. Set `NEXT_PUBLIC_SUPABASE_URL` and either `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel **Environment Variables** (Production + Preview as needed).
 4. Redeploy.
 
 ### Remote images
