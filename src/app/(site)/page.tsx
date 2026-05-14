@@ -45,35 +45,41 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative -mt-24 min-h-[88vh] overflow-hidden bg-neutral-900 pt-24 md:-mt-[5.75rem] md:pt-[5.75rem]">
-        {hero?.image_url ? (
-          <Image
-            src={hero.image_url}
-            alt=""
-            fill
-            priority
-            className="object-cover brightness-[0.85]"
-            sizes="100vw"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 to-neutral-900" />
-        )}
-        <div className="relative z-10 mx-auto flex max-w-6xl flex-col justify-center gap-6 px-4 py-24 text-left md:px-6 md:py-32">
-          <h1 className="max-w-2xl font-serif text-4xl leading-tight text-olive md:text-5xl lg:text-6xl">
-            {hero?.headline_text ?? "Tradisi dalam Anyaman Modern"}
-          </h1>
-          <p className="max-w-xl text-base text-neutral-100 md:text-lg">
-            {hero?.description_text ??
-              "Solusi kemasan ramah lingkungan, estetik, dan berkelanjutan untuk katering dan hampers premium."}
-          </p>
-          <div>
-            <Link
-              href="/produk"
-              className="inline-flex items-center gap-2 rounded-md bg-olive px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-olive-dark"
-            >
-              Jelajahi Produk
-              <span aria-hidden>→</span>
-            </Link>
+      <section className="relative -mt-24 overflow-hidden bg-neutral-900 pt-24 md:-mt-[5.75rem] md:pt-[5.75rem]">
+        {/*
+          Portrait hero photos + object-cover scale up with viewport width (subject looks "huge").
+          Constrain both max width and max height so the crop stays reasonable on large monitors.
+        */}
+        <div className="relative mx-auto h-[clamp(22rem,85dvh,56rem)] w-full max-w-[90rem]">
+          {hero?.image_url ? (
+            <Image
+              src={hero.image_url}
+              alt=""
+              fill
+              priority
+              className="object-cover object-center brightness-[0.85]"
+              sizes="(max-width: 1440px) 100vw, 1440px"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 to-neutral-900" />
+          )}
+          <div className="absolute inset-0 z-10 mx-auto flex max-w-6xl flex-col justify-center gap-6 px-4 py-16 text-left md:px-6 md:py-24">
+            <h1 className="max-w-2xl font-serif text-4xl leading-tight text-olive md:text-5xl lg:text-6xl">
+              {hero?.headline_text ?? "Tradisi dalam Anyaman Modern"}
+            </h1>
+            <p className="max-w-xl text-base text-neutral-100 md:text-lg">
+              {hero?.description_text ??
+                "Solusi kemasan ramah lingkungan, estetik, dan berkelanjutan untuk katering dan hampers premium."}
+            </p>
+            <div>
+              <Link
+                href="/produk"
+                className="inline-flex items-center gap-2 rounded-md bg-olive px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-olive-dark"
+              >
+                Jelajahi Produk
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
