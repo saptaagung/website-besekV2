@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatIdr, getContactInfo, getProducts } from "@/lib/data/queries";
+import { getContactInfo, getProducts } from "@/lib/data/queries";
 import { waLink } from "@/lib/whatsapp";
 
 function IconChat() {
