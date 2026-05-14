@@ -21,11 +21,11 @@ if (-not (Test-Path "package.json")) {
 
 if (-not (Test-Path ".env.local") -and (Test-Path ".env.example")) {
   Copy-Item ".env.example" ".env.local"
-  Write-Host "Created .env.local from .env.example — add your Supabase keys." -ForegroundColor Yellow
+  Write-Host 'Created .env.local from .env.example — add your Supabase keys.' -ForegroundColor Yellow
 }
 
 Write-Host "Installing dependencies..." -ForegroundColor Cyan
 npm install
 
-Write-Host "Starting dev server at http://localhost:3000 (Ctrl+C to stop)..." -ForegroundColor Cyan
+Write-Host 'Starting dev server at http://localhost:3000 (press Ctrl+C to stop)...' -ForegroundColor Cyan
 npm run dev
