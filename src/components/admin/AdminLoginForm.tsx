@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { ADMIN_DEFAULT_EMAIL, ADMIN_DEFAULT_PASSWORD } from "@/lib/admin-login-defaults";
 import { createClient } from "@/lib/supabase/client";
+import { adminBtnPrimary, adminErrorBanner, adminInput, adminLabel } from "@/components/admin/admin-ui";
 
 export function AdminLoginForm() {
   const router = useRouter();
@@ -37,18 +38,21 @@ export function AdminLoginForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full max-w-md space-y-4 rounded-xl bg-white p-8 shadow-sm ring-1 ring-black/5"
+      className="w-full max-w-md space-y-5 rounded-2xl border border-outline-variant bg-surface-container-lowest p-8 shadow-[0_4px_24px_rgba(85,107,47,0.06)]"
     >
-      <h1 className="font-serif text-2xl text-olive">Masuk Admin</h1>
+      <div>
+        <p className="font-serif text-xl font-bold text-primary">Besek Artisanal</p>
+        <h1 className="mt-1 font-serif text-2xl font-semibold text-on-surface">Masuk Admin</h1>
+      </div>
       {configError ? (
-        <p className="text-sm text-red-600">
+        <p className={adminErrorBanner}>
           Konfigurasi database tidak tersedia. Periksa file lingkungan (.env.local).
         </p>
       ) : null}
       <div>
-        <label className="text-sm font-medium">Email</label>
+        <label className={adminLabel}>Email</label>
         <input
-          className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+          className={adminInput}
           type="email"
           autoComplete="email"
           value={email}
@@ -57,9 +61,9 @@ export function AdminLoginForm() {
         />
       </div>
       <div>
-        <label className="text-sm font-medium">Password</label>
+        <label className={adminLabel}>Password</label>
         <input
-          className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+          className={adminInput}
           type="password"
           autoComplete="current-password"
           value={password}
@@ -67,11 +71,11 @@ export function AdminLoginForm() {
           required
         />
       </div>
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className={adminErrorBanner}>{error}</p> : null}
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-md bg-olive py-2 text-sm font-semibold text-white hover:bg-olive-dark disabled:opacity-60"
+        className={`${adminBtnPrimary} w-full py-3`}
       >
         {pending ? "Memproses…" : "Masuk"}
       </button>

@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import {
   imageObjectFitClass,
   imageObjectPositionStyle,
-  imageSizesOrDefault,
 } from "@/lib/image-display";
 
 export function ProductMedia({
@@ -14,7 +12,6 @@ export function ProductMedia({
   mainImageUrl,
   mainImageFit,
   mainImagePosition,
-  mainImageSizes,
 }: {
   images: string[];
   productName: string;
@@ -31,19 +28,16 @@ export function ProductMedia({
   const isMainView = active === mainRef;
   const fitClass = isMainView ? imageObjectFitClass(mainImageFit) : "object-cover";
   const posStyle = isMainView ? imageObjectPositionStyle(mainImagePosition) : undefined;
-  const mainSizes = imageSizesOrDefault(mainImageSizes, "(max-width: 768px) 100vw, 50vw");
 
   return (
     <div className="space-y-4">
       <div className="relative aspect-square overflow-hidden rounded-lg bg-neutral-100">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={active}
           alt={productName}
-          fill
-          priority
-          className={fitClass}
+          className={`absolute inset-0 h-full w-full ${fitClass}`}
           style={posStyle}
-          sizes={isMainView ? mainSizes : "(max-width: 768px) 100vw, 50vw"}
         />
       </div>
       <div className="flex gap-2 overflow-x-auto pb-1">
@@ -57,7 +51,8 @@ export function ProductMedia({
             }`}
             aria-label="Ganti gambar produk"
           >
-            <Image src={src} alt="" fill className="object-cover" sizes="80px" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
           </button>
         ))}
       </div>

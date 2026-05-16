@@ -11,16 +11,16 @@ export default async function AdminGalleryPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="font-serif text-3xl text-olive">Galeri</h1>
-        <p className="mt-2 text-sm text-muted">
-          Gambar mosaik untuk halaman Cerita Kami. Gunakan nama bagian seperti{" "}
-          <code className="rounded bg-neutral-100 px-1">AboutMosaic_Left</code>,{" "}
-          <code className="rounded bg-neutral-100 px-1">AboutMosaic_RightTop</code>,{" "}
-          <code className="rounded bg-neutral-100 px-1">AboutMosaic_RightBottom</code>.
+    <div className="mx-auto max-w-4xl space-y-8">
+      <header>
+        <h1 className="font-serif text-3xl font-semibold text-primary md:text-4xl">Galeri Cerita Kami</h1>
+        <p className="mt-2 max-w-2xl text-sm text-on-surface-variant">
+          Gambar mosaik di halaman tentang kami. Nama bagian standar:{" "}
+          <code className="rounded bg-surface-container-low px-1 text-xs">AboutMosaic_Left</code>,{" "}
+          <code className="rounded bg-surface-container-low px-1 text-xs">AboutMosaic_RightTop</code>,{" "}
+          <code className="rounded bg-surface-container-low px-1 text-xs">AboutMosaic_RightBottom</code>.
         </p>
-      </div>
+      </header>
       <GalleryAdmin initialRows={rows} />
     </div>
   );

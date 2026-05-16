@@ -3,6 +3,17 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { GalleryRow } from "@/lib/database.types";
+import {
+  adminBtnDanger,
+  adminBtnPrimarySm,
+  adminCard,
+  adminCardPadded,
+  adminErrorBanner,
+  adminInput,
+  adminLabel,
+  adminLabelMuted,
+  adminSelect,
+} from "@/components/admin/admin-ui";
 
 export function GalleryAdmin({ initialRows }: { initialRows: GalleryRow[] }) {
   const supabase = createClient();
@@ -58,71 +69,53 @@ export function GalleryAdmin({ initialRows }: { initialRows: GalleryRow[] }) {
 
   return (
     <div className="space-y-6">
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
-      <div className="rounded-xl border border-neutral-200 bg-white p-5">
-        <h2 className="font-serif text-lg text-olive">Tambah gambar</h2>
-        <div className="mt-3 grid gap-3 md:grid-cols-3">
-          <label className="text-sm md:col-span-3">
-            <span className="font-medium">URL gambar</span>
-            <input
-              className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
-              value={form.image_url}
-              onChange={(e) => setForm({ ...form, image_url: e.target.value })}
-            />
+      {error ? <p className={adminErrorBanner}>{error}</p> : null}
+      <div className={adminCardPadded}>
+        <h2 className="border-b border-surface-variant pb-3 font-serif text-lg text-primary">Tambah gambar</h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <label className={`${adminLabel} md:col-span-3`}>
+            URL gambar
+            <input className={adminInput} value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} />
           </label>
-          <label className="text-sm">
-            <span className="font-medium">Bagian</span>
-            <input
-              className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
-              value={form.section_name}
-              onChange={(e) => setForm({ ...form, section_name: e.target.value })}
-            />
+          <label className={adminLabel}>
+            Bagian
+            <input className={adminInput} value={form.section_name} onChange={(e) => setForm({ ...form, section_name: e.target.value })} />
           </label>
-          <label className="text-sm md:col-span-2">
-            <span className="font-medium">Teks alt</span>
-            <input
-              className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
-              value={form.alt_text}
-              onChange={(e) => setForm({ ...form, alt_text: e.target.value })}
-            />
+          <label className={`${adminLabel} md:col-span-2`}>
+            Teks alt
+            <input className={adminInput} value={form.alt_text} onChange={(e) => setForm({ ...form, alt_text: e.target.value })} />
           </label>
-          <label className="text-sm">
-            <span className="font-medium">Isi frame</span>
+          <label className={adminLabel}>
+            Isi frame
             <select
-              className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+              className={adminSelect}
               value={form.image_fit}
-              onChange={(e) =>
-                setForm({ ...form, image_fit: e.target.value as "cover" | "contain" })
-              }
+              onChange={(e) => setForm({ ...form, image_fit: e.target.value as "cover" | "contain" })}
             >
               <option value="cover">Cover</option>
               <option value="contain">Contain</option>
             </select>
           </label>
-          <label className="text-sm">
-            <span className="font-medium">Posisi crop (CSS)</span>
+          <label className={adminLabel}>
+            Posisi crop (CSS)
             <input
-              className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+              className={adminInput}
               value={form.image_position}
               onChange={(e) => setForm({ ...form, image_position: e.target.value })}
               placeholder="center center"
             />
           </label>
-          <label className="text-sm md:col-span-3">
-            <span className="font-medium">Sizes (Next.js)</span>
+          <label className={`${adminLabel} md:col-span-3`}>
+            Ukuran responsif (sizes)
             <input
-              className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+              className={adminInput}
               value={form.image_sizes}
               onChange={(e) => setForm({ ...form, image_sizes: e.target.value })}
               placeholder="(max-width:768px) 100vw, 50vw"
             />
           </label>
         </div>
-        <button
-          type="button"
-          onClick={() => void add()}
-          className="mt-3 rounded-md bg-olive px-4 py-2 text-sm font-semibold text-white hover:bg-olive-dark"
-        >
+        <button type="button" onClick={() => void add()} className={`${adminBtnPrimarySm} mt-4`}>
           Tambahkan
         </button>
       </div>
@@ -178,80 +171,61 @@ function GalleryRowCard({
   }
 
   return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-      <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-        Galeri · {row.section_name}
-      </p>
-      {localErr ? <p className="mt-2 text-sm text-red-600">{localErr}</p> : null}
-      <div className="mt-3 grid gap-3 md:grid-cols-2">
-        <label className="text-sm md:col-span-2">
-          <span className="font-medium">URL gambar</span>
-          <input
-            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
-            value={draft.image_url}
-            onChange={(e) => setDraft({ ...draft, image_url: e.target.value })}
-          />
+    <div className={`${adminCard} p-4 md:p-5`}>
+      <p className={adminLabelMuted}>Galeri · {row.section_name}</p>
+      {localErr ? <p className={`${adminErrorBanner} mt-2`}>{localErr}</p> : null}
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <label className={`${adminLabel} md:col-span-2`}>
+          URL gambar
+          <input className={adminInput} value={draft.image_url} onChange={(e) => setDraft({ ...draft, image_url: e.target.value })} />
         </label>
-        <label className="text-sm">
-          <span className="font-medium">Bagian</span>
-          <input
-            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
-            value={draft.section_name}
-            onChange={(e) => setDraft({ ...draft, section_name: e.target.value })}
-          />
+        <label className={adminLabel}>
+          Bagian
+          <input className={adminInput} value={draft.section_name} onChange={(e) => setDraft({ ...draft, section_name: e.target.value })} />
         </label>
-        <label className="text-sm">
-          <span className="font-medium">Alt</span>
+        <label className={adminLabel}>
+          Alt
           <input
-            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            className={adminInput}
             value={draft.alt_text ?? ""}
             onChange={(e) => setDraft({ ...draft, alt_text: e.target.value || null })}
           />
         </label>
-        <label className="text-sm">
-          <span className="font-medium">Isi frame</span>
+        <label className={adminLabel}>
+          Isi frame
           <select
-            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            className={adminSelect}
             value={draft.image_fit === "contain" ? "contain" : "cover"}
-            onChange={(e) => setDraft({ ...draft, image_fit: e.target.value })}
+            onChange={(e) => setDraft({ ...draft, image_fit: e.target.value as "cover" | "contain" })}
           >
             <option value="cover">Cover</option>
             <option value="contain">Contain</option>
           </select>
         </label>
-        <label className="text-sm">
-          <span className="font-medium">Posisi crop</span>
+        <label className={adminLabel}>
+          Posisi crop
           <input
-            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            className={adminInput}
             value={draft.image_position ?? ""}
             onChange={(e) => setDraft({ ...draft, image_position: e.target.value || null })}
             placeholder="center center"
           />
         </label>
-        <label className="text-sm md:col-span-2">
-          <span className="font-medium">Sizes</span>
+        <label className={`${adminLabel} md:col-span-2`}>
+          Sizes
           <input
-            className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm"
+            className={adminInput}
             value={draft.image_sizes ?? ""}
             onChange={(e) => setDraft({ ...draft, image_sizes: e.target.value || null })}
             placeholder="(max-width:768px) 100vw, 50vw"
           />
         </label>
       </div>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <button
-          type="button"
-          disabled={pending}
-          onClick={() => void save()}
-          className="rounded-md bg-olive px-4 py-2 text-sm font-semibold text-white hover:bg-olive-dark disabled:opacity-60"
-        >
+      <div className="mt-4 flex flex-wrap gap-2">
+        <button type="button" disabled={pending} onClick={() => void save()} className={adminBtnPrimarySm}>
           Simpan
         </button>
-        <button
-          type="button"
-          className="rounded-md border border-red-200 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-50"
-          onClick={onRemove}
-        >
+        <button type="button" className={adminBtnDanger} onClick={onRemove}>
           Hapus
         </button>
       </div>
