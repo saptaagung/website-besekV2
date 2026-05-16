@@ -1,0 +1,32 @@
+# Pings Supabase every 2 days so the free-tier project is not paused for inactivity.
+# Schedule: 12:00 UTC on days 1, 3, 5, … (change to `0 12 */3 * *` for every 3 days).
+name: Supabase keepalive
+
+on:
+  schedule:
+    - cron: "0 12 */2 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
+            echo "Add GitHub repo secrets:"
+            echo "  NEXT_PUBLIC_SUPABASE_URL — same as .env.local"
+            echo "  SUPABASE_ANON_KEY — anon or publishable key"
+            exit 1
+          fi
+          base="${SUPABASE_URL%/}"
+          url="${base}/rest/v1/site_content?select=section_name&limit=1"
+          code=$(curl -fsS -o /tmp/body.json -w "%{http_code}" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}")
+          echo "HTTP $code"
+          cat /tmp/body.json
+          test "$code" = "200"
