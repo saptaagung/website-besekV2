@@ -1,45 +1,42 @@
-import Image from "next/image";
 import {
   imageObjectFitClass,
   imageObjectPositionStyle,
-  imageSizesOrDefault,
 } from "@/lib/image-display";
 
 type Props = {
   src: string;
   alt: string;
   className?: string;
-  sizes: string | null | undefined;
-  sizesFallback: string;
+  sizes?: string | null;
+  sizesFallback?: string;
   fit?: string | null;
   position?: string | null;
   priority?: boolean;
 };
 
-/** Next/Image `fill` with CMS-controlled fit, object-position, and `sizes`. */
+/**
+ * CMS images use a native <img> so admins can paste any HTTPS URL
+ * (Supabase Storage, Google, Unsplash, etc.) without next.config host allowlists.
+ */
 export function CmsImage({
   src,
   alt,
   className = "",
-  sizes,
-  sizesFallback,
   fit,
   position,
-  priority,
 }: Props) {
   const fitClass = imageObjectFitClass(fit);
   const posStyle = imageObjectPositionStyle(position);
-  const sz = imageSizesOrDefault(sizes, sizesFallback);
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={src}
       alt={alt}
-      fill
-      priority={priority}
-      className={`${fitClass} ${className}`.trim()}
+      className={`absolute inset-0 h-full w-full ${fitClass} ${className}`.trim()}
       style={posStyle}
-      sizes={sz}
+      loading="lazy"
+      decoding="async"
     />
   );
 }
