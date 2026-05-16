@@ -1,3 +1,4 @@
+import { HOME_CAROUSEL_SECTION } from "@/lib/content/sections";
 import type { ContactInfoRow, GalleryRow, ProductRow, SiteContentRow } from "@/lib/database.types";
 
 /** Fallbacks when Supabase env is not configured or tables are empty */
@@ -171,6 +172,30 @@ export const defaultContact: ContactInfoRow = {
     lng: 110.36,
   },
 };
+
+export const defaultHomeCarousel: GalleryRow[] = [
+  {
+    id: "hc1",
+    image_url: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1200&q=80",
+    alt_text: "Anyaman besek bambu premium",
+    section_name: HOME_CAROUSEL_SECTION,
+    image_sizes: "(max-width: 768px) 100vw, 50vw",
+  },
+  {
+    id: "hc2",
+    image_url: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=1200&q=80",
+    alt_text: "Proses anyaman tangan pengrajin",
+    section_name: HOME_CAROUSEL_SECTION,
+    image_sizes: "(max-width: 768px) 100vw, 50vw",
+  },
+  {
+    id: "hc3",
+    image_url: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&q=80",
+    alt_text: "Bahan bambu alami",
+    section_name: HOME_CAROUSEL_SECTION,
+    image_sizes: "(max-width: 768px) 100vw, 50vw",
+  },
+];
 
 export const defaultGallery: GalleryRow[] = [
   {

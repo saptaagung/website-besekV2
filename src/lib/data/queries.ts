@@ -4,9 +4,11 @@ import type {
   ProductRow,
   SiteContentRow,
 } from "@/lib/database.types";
+import { HOME_CAROUSEL_SECTION } from "@/lib/content/sections";
 import {
   defaultContact,
   defaultGallery,
+  defaultHomeCarousel,
   defaultProducts,
   defaultSiteContent,
 } from "@/lib/content/defaults";
@@ -87,6 +89,21 @@ export async function getContactInfo(): Promise<ContactInfoRow> {
     return defaultContact;
   }
   return data as ContactInfoRow;
+}
+
+export async function getHomeCarouselSlides(): Promise<GalleryRow[]> {
+  const supabase = await createServerSupabase();
+  if (!supabase) return defaultHomeCarousel;
+  const { data, error } = await supabase
+    .from("gallery")
+    .select("*")
+    .eq("section_name", HOME_CAROUSEL_SECTION)
+    .order("created_at", { ascending: true });
+  if (error) {
+    console.error(error);
+    return [];
+  }
+  return (data as GalleryRow[]) ?? [];
 }
 
 export async function getGalleryBySections(sections: string[]): Promise<GalleryRow[]> {

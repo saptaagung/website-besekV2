@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { CmsImage } from "@/components/cms/CmsImage";
+import { HomeHeroCarousel } from "@/components/home/HomeHeroCarousel";
+import { HOME_CAROUSEL_SECTION } from "@/lib/content/sections";
+import type { GalleryRow } from "@/lib/database.types";
 import {
   formatIdr,
+  getHomeCarouselSlides,
   getSignatureProducts,
   getSiteSections,
 } from "@/lib/data/queries";
@@ -42,30 +46,34 @@ export default async function HomePage() {
     Icon: whyIcons[i],
   }));
   const signatureProducts = await getSignatureProducts();
+  const carouselSlides = await getHomeCarouselSlides();
+
+  const heroMediaSlides: GalleryRow[] =
+    carouselSlides.length > 0
+      ? carouselSlides
+      : hero?.image_url
+        ? [
+            {
+              id: "hero-fallback",
+              image_url: hero.image_url,
+              alt_text: hero.headline_text,
+              section_name: HOME_CAROUSEL_SECTION,
+              image_fit: hero.image_fit,
+              image_position: hero.image_position,
+              image_sizes: hero.image_sizes,
+            },
+          ]
+        : [];
 
   return (
     <>
-      <section className="relative -mt-24 overflow-hidden bg-neutral-900 pt-24 md:-mt-[5.75rem] md:pt-[5.75rem]">
-        <div className="relative mx-auto h-[clamp(22rem,85dvh,56rem)] w-full">
-          {hero?.image_url ? (
-            <CmsImage
-              src={hero.image_url}
-              alt=""
-              priority
-              fit={hero.image_fit}
-              position={hero.image_position}
-              sizes={hero.image_sizes}
-              sizesFallback="100vw"
-              className="brightness-[0.85]"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 to-neutral-900" />
-          )}
-          <div className="absolute inset-0 z-10 mx-auto flex max-w-6xl flex-col justify-center gap-6 px-4 py-16 text-left md:px-6 md:py-24">
-            <h1 className="max-w-2xl font-serif text-4xl leading-tight text-olive md:text-5xl lg:text-6xl">
+      <section className="relative -mt-24 overflow-hidden bg-cream pt-24 md:-mt-[5.75rem] md:pt-[5.75rem]">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 py-12 md:grid-cols-2 md:gap-12 md:px-6 md:py-16 lg:gap-16 lg:py-20">
+          <div className="flex min-w-0 w-full flex-1 flex-col justify-center gap-6">
+            <h1 className="w-full max-w-2xl font-serif text-3xl leading-tight text-olive sm:text-4xl md:text-5xl lg:text-6xl">
               {hero?.headline_text ?? "Tradisi dalam Anyaman Modern"}
             </h1>
-            <p className="max-w-xl text-base text-neutral-100 md:text-lg">
+            <p className="w-full max-w-2xl whitespace-normal text-base leading-relaxed text-muted md:text-lg">
               {hero?.description_text ??
                 "Solusi kemasan ramah lingkungan, estetik, dan berkelanjutan untuk katering dan hampers premium."}
             </p>
@@ -79,20 +87,23 @@ export default async function HomePage() {
               </Link>
             </div>
           </div>
+          <div className="relative aspect-[4/5] w-full min-w-0 overflow-hidden rounded-2xl bg-olive/10 shadow-lg ring-1 ring-black/5 sm:aspect-square md:aspect-[4/5]">
+            <HomeHeroCarousel slides={heroMediaSlides} />
+          </div>
         </div>
       </section>
 
       <section className="border-b border-neutral-100 bg-white py-16 md:py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-3 md:gap-8 md:px-6">
+        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 md:grid-cols-3 md:gap-8 md:px-6">
           {whyBlocks.map(({ section, Icon }, idx) => (
-            <div key={idx} className="flex flex-col items-start gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-peach">
+            <div key={idx} className="flex min-w-0 w-full flex-col items-start gap-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-peach">
                 <Icon />
               </div>
-              <h3 className="font-serif text-xl text-neutral-900">
+              <h3 className="w-full font-serif text-xl text-neutral-900 md:text-2xl">
                 {section?.headline_text ?? "—"}
               </h3>
-              <p className="text-sm leading-relaxed text-muted">
+              <p className="w-full max-w-prose text-sm leading-relaxed text-muted md:text-base">
                 {section?.description_text ?? ""}
               </p>
             </div>
@@ -101,20 +112,20 @@ export default async function HomePage() {
       </section>
 
       <section className="bg-cream py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <h2 className="font-serif text-3xl text-olive md:text-4xl">
+        <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+          <div className="mb-10 flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="min-w-0 flex-1 w-full max-w-3xl">
+              <h2 className="w-full font-serif text-3xl text-olive md:text-4xl lg:text-5xl">
                 {signatureIntro?.headline_text ?? "Koleksi Signature"}
               </h2>
-              <p className="mt-3 max-w-xl text-muted">
+              <p className="mt-3 w-full max-w-2xl whitespace-normal text-base leading-relaxed text-muted md:text-lg">
                 {signatureIntro?.description_text ??
                   "Estetika natural untuk setiap kebutuhan presentasi Anda."}
               </p>
             </div>
             <Link
               href="/produk"
-              className="inline-flex items-center rounded-full border border-neutral-800 bg-white px-5 py-2 text-sm font-semibold text-neutral-900 transition hover:border-olive hover:text-olive"
+              className="inline-flex shrink-0 items-center rounded-full border border-neutral-800 bg-white px-5 py-2 text-sm font-semibold text-neutral-900 transition hover:border-olive hover:text-olive"
             >
               Lihat Semua Produk
             </Link>

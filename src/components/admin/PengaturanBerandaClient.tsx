@@ -3,8 +3,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { BerandaCarouselAdmin } from "@/components/admin/BerandaCarouselAdmin";
 import { createClient } from "@/lib/supabase/client";
-import type { SiteContentRow } from "@/lib/database.types";
+import type { GalleryRow, SiteContentRow } from "@/lib/database.types";
 
 /* ─── helpers ─────────────────────────────────────────────── */
 const UNDERLINE_INPUT =
@@ -19,8 +20,10 @@ const SECTION_HEADER = "mb-6 border-b border-surface-container-highest pb-3 flex
 /* ─── component ───────────────────────────────────────────── */
 export function PengaturanBerandaClient({
   initialRows,
+  initialCarouselSlides,
 }: {
   initialRows: SiteContentRow[];
+  initialCarouselSlides: GalleryRow[];
 }) {
   const supabase = createClient();
   const [rows, setRows] = useState<SiteContentRow[]>(initialRows);
@@ -109,7 +112,10 @@ export function PengaturanBerandaClient({
           </div>
           {/* Hero Image */}
           <div className="space-y-1">
-            <label className={UNDERLINE_LABEL}>Gambar Latar Hero</label>
+            <label className={UNDERLINE_LABEL}>Gambar Hero (cadangan)</label>
+            <p className="mb-2 text-xs text-on-surface-variant">
+              Dipakai jika belum ada slide di Carousel Beranda di bawah.
+            </p>
             <div className="h-64 border-2 border-dashed border-outline-variant rounded-lg bg-surface-container-lowest flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-low transition-colors group relative overflow-hidden">
               {hero?.image_url ? (
                 <img
@@ -136,6 +142,8 @@ export function PengaturanBerandaClient({
           </div>
         </div>
       </section>
+
+      <BerandaCarouselAdmin initialSlides={initialCarouselSlides} />
 
       {/* ── 2. Nilai Jual Utama ───────────────────────────── */}
       <section className={SECTION_CARD}>

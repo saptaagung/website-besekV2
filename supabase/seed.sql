@@ -80,6 +80,21 @@ values
     'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=700&q=80',
     'Batang bambu mentah sedang diproses di meja kerja bengkel.',
     'AboutMosaic_RightBottom'
+  ),
+  (
+    'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1200&q=80',
+    'Anyaman besek bambu premium',
+    'HomeCarousel'
+  ),
+  (
+    'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=1200&q=80',
+    'Proses anyaman tangan pengrajin',
+    'HomeCarousel'
+  ),
+  (
+    'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&q=80',
+    'Bahan bambu alami',
+    'HomeCarousel'
   );
 
 -- If you re-run this block, delete previous mosaic rows first to avoid duplicates.

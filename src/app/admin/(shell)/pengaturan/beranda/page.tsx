@@ -1,18 +1,28 @@
 import { createServerSupabase } from "@/lib/supabase/server";
-import type { SiteContentRow } from "@/lib/database.types";
+import { HOME_CAROUSEL_SECTION } from "@/lib/content/sections";
+import type { GalleryRow, SiteContentRow } from "@/lib/database.types";
 import { PengaturanBerandaClient } from "@/components/admin/PengaturanBerandaClient";
 
 export default async function PengaturanBerandaPage() {
   const supabase = await createServerSupabase();
   let siteRows: SiteContentRow[] = [];
+  let carouselSlides: GalleryRow[] = [];
 
   if (supabase) {
-    const { data } = await supabase
-      .from("site_content")
-      .select("*")
-      .in("page_name", ["Home", "About", "Contact"])
-      .order("section_name");
-    siteRows = (data as SiteContentRow[]) ?? [];
+    const [{ data: siteData }, { data: carouselData }] = await Promise.all([
+      supabase
+        .from("site_content")
+        .select("*")
+        .in("page_name", ["Home", "About", "Contact"])
+        .order("section_name"),
+      supabase
+        .from("gallery")
+        .select("*")
+        .eq("section_name", HOME_CAROUSEL_SECTION)
+        .order("created_at", { ascending: true }),
+    ]);
+    siteRows = (siteData as SiteContentRow[]) ?? [];
+    carouselSlides = (carouselData as GalleryRow[]) ?? [];
   }
 
   return (
@@ -26,7 +36,7 @@ export default async function PengaturanBerandaPage() {
           Kelola konten dan tampilan halaman utama Besek Artisanal.
         </p>
       </div>
-      <PengaturanBerandaClient initialRows={siteRows} />
+      <PengaturanBerandaClient initialRows={siteRows} initialCarouselSlides={carouselSlides} />
     </div>
   );
 }
