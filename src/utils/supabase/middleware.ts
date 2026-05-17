@@ -11,6 +11,15 @@ export async function updateSession(request: NextRequest) {
   const key = getSupabasePublishableKey();
 
   if (!url || !key) {
+    const isProtectedAdmin =
+      request.nextUrl.pathname.startsWith("/admin") &&
+      !request.nextUrl.pathname.startsWith("/admin/login");
+    if (isProtectedAdmin) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/admin/login";
+      redirectUrl.searchParams.set("error", "config");
+      return NextResponse.redirect(redirectUrl);
+    }
     return supabaseResponse;
   }
 

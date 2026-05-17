@@ -1,9 +1,7 @@
 /**
- * Default admin login (pre-filled on /admin/login).
- * Create a Supabase Auth user with this EXACT email and password:
- * Dashboard → Authentication → Users → Add user
+ * Suggested admin email when creating the first Supabase Auth user.
+ * Dashboard → Authentication → Users → Add user (set your own password).
  *
- * Change both values before production if this file is ever public.
+ * Do not commit real passwords; credentials live only in Supabase.
  */
-export const ADMIN_DEFAULT_EMAIL = "besek.dashboard.ops@besekartisanal.id";
-export const ADMIN_DEFAULT_PASSWORD = "Besek-Adm-2026!k9Qx";
+export const ADMIN_SETUP_EMAIL = "besek.dashboard.ops@besekartisanal.id";

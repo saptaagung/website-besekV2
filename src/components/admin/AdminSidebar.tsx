@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AdminLogoutButton } from "@/components/admin/AdminLogoutButton";
 
 const pengaturanSub = [
   { href: "/admin/pengaturan/beranda", label: "Beranda" },
@@ -113,12 +114,15 @@ export function AdminSidebar() {
         </div>
       </div>
 
-      {/* User Profile Minimal */}
-      <div className="mt-auto pt-6 border-t border-outline-variant flex items-center gap-3 px-3 shrink-0">
-        <div className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-label-md">
-          A
+      {/* Footer */}
+      <div className="mt-auto shrink-0 space-y-3 border-t border-outline-variant px-3 pt-6">
+        <div className="flex items-center gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary-container text-label-md text-on-secondary-container">
+            A
+          </div>
+          <span className="text-label-sm text-on-surface">Admin</span>
         </div>
-        <span className="text-label-sm text-on-surface">Admin Profile</span>
+        <AdminLogoutButton variant="sidebar" />
       </div>
     </nav>
   );

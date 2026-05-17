@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { ADMIN_DEFAULT_EMAIL, ADMIN_DEFAULT_PASSWORD } from "@/lib/admin-login-defaults";
 import { createClient } from "@/lib/supabase/client";
 import { adminBtnPrimary, adminErrorBanner, adminInput, adminLabel } from "@/components/admin/admin-ui";
 
@@ -10,8 +9,8 @@ export function AdminLoginForm() {
   const router = useRouter();
   const params = useSearchParams();
   const supabase = createClient();
-  const [email, setEmail] = useState(ADMIN_DEFAULT_EMAIL);
-  const [password, setPassword] = useState(ADMIN_DEFAULT_PASSWORD);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -38,7 +37,7 @@ export function AdminLoginForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full max-w-md space-y-5 rounded-2xl border border-outline-variant bg-surface-container-lowest p-8 shadow-[0_4px_24px_rgba(85,107,47,0.06)]"
+      className="box-border w-[min(100%,28rem)] space-y-5 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 sm:p-8 shadow-[0_4px_24px_rgba(85,107,47,0.06)]"
     >
       <div>
         <p className="font-serif text-xl font-bold text-primary">Besek Artisanal</p>

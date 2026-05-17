@@ -13,6 +13,13 @@ export default async function AdminShellLayout({
     redirect("/admin/login?error=config");
   }
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    redirect("/admin/login");
+  }
+
   return (
     <div className="flex min-h-screen bg-background text-on-background font-sans antialiased overflow-x-hidden">
       <AdminSidebar />

@@ -53,12 +53,13 @@
   --color-inverse-surface: #303030;
   --color-inverse-on-surface: #f3f0f0;
 
-  --spacing-xs: 4px;
-  --spacing-sm: 12px;
-  --spacing-base: 8px;
-  --spacing-md: 24px;
-  --spacing-lg: 48px;
-  --spacing-xl: 80px;
+  /* Besek layout tokens — use besek-* names so we do not override Tailwind's sm/md/lg scale */
+  --spacing-besek-xs: 4px;
+  --spacing-besek-sm: 12px;
+  --spacing-besek-base: 8px;
+  --spacing-besek-md: 24px;
+  --spacing-besek-lg: 48px;
+  --spacing-besek-xl: 80px;
   --spacing-gutter: 24px;
   --spacing-margin-mobile: 16px;
   --spacing-margin-desktop: 64px;

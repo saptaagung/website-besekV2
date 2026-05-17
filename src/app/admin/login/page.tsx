@@ -3,10 +3,16 @@ import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
 
 export default function AdminLoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Suspense fallback={<p className="font-serif text-olive">Memuat…</p>}>
+    <main className="grid min-h-screen place-items-center bg-background p-4 sm:p-6">
+      <Suspense
+        fallback={
+          <div className="w-[min(100%,28rem)] rounded-2xl border border-outline-variant bg-surface-container-lowest p-8 text-center font-serif text-primary">
+            Memuat…
+          </div>
+        }
+      >
         <AdminLoginForm />
       </Suspense>
-    </div>
+    </main>
   );
 }

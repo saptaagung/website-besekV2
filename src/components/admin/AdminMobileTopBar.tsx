@@ -1,5 +1,7 @@
 "use client";
 
+import { AdminLogoutButton } from "@/components/admin/AdminLogoutButton";
+
 export function AdminMobileTopBar() {
   return (
     <header className="bg-surface border-b border-outline-variant sticky top-0 z-40">
@@ -7,13 +9,8 @@ export function AdminMobileTopBar() {
         <button className="md:hidden text-on-surface-variant p-2">
           <span className="material-symbols-outlined">menu</span>
         </button>
-        <div className="flex items-center gap-4 ml-auto">
-          <button className="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-highest">
-            <span className="material-symbols-outlined">notifications</span>
-          </button>
-          <button className="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-highest">
-            <span className="material-symbols-outlined">account_circle</span>
-          </button>
+        <div className="ml-auto flex items-center gap-2">
+          <AdminLogoutButton variant="header" />
         </div>
       </div>
     </header>
