@@ -24,9 +24,12 @@ jobs:
           fi
           base="${SUPABASE_URL%/}"
           url="${base}/rest/v1/site_content?select=section_name&limit=1"
-          code=$(curl -fsS -o /tmp/body.json -w "%{http_code}" \
+          
+          # PERBAIKAN: Menambahkan "$url" ke dalam perintah curl di bawah ini
+          code=$(curl -fsS "$url" -o /tmp/body.json -w "%{http_code}" \
             -H "apikey: ${SUPABASE_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_KEY}")
+            
           echo "HTTP $code"
           cat /tmp/body.json
           test "$code" = "200"
